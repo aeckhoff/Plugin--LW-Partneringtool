@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://www.nks-umwelt.de/assets/css/lwps_bmbf.css" type="text/css" />
+<div class="lwPartneringTool">
+
+	<h1><?php echo $this->i18n['entry_headline']; ?></h1>
+
+    <div class="pcgcsuche">
+
+        <fieldset>
+
+            <label><?php echo $this->i18n['entry_contactname']; ?>:</label><br />
+            <?php echo $this->data['contactname']; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_country']; ?>:</label><br />
+            <?php echo $this->country; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_organisation']; ?>:</label><br />
+            <?php echo $this->data['organisation']; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_orgatype']; ?>:</label><br />
+            <?php echo $this->orgatype; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_email']; ?>:</label><br />
+            <?php echo $this->data['email']; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_phone']; ?>:</label><br />
+            <?php echo $this->data['telephone']; ?><br />
+            <br/>
+            
+            <label><?php echo $this->i18n['entry_keywords']; ?>:</label><br />
+            <?php echo $this->data['keywords']; ?><br />
+            <br/>
+            
+            <label><?php echo $this->i18n['entry_description']; ?>:</label><br />
+            <?php echo $this->data['description']; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_orgadesc']; ?>:</label><br />
+            <?php echo $this->data['orgadesc']; ?><br />
+            <br/>
+
+            <label><?php echo $this->i18n['entry_topic']; ?>:</label><br />
+            <?php echo $this->topic; ?><br />
+            <br/>
+            
+        </fieldset>
+
+    </div>
+
+    <div id="pcgcsfsubmitarea">
+        <p class="invisible">&nbsp;</p>
+        
+    	<input class="whitespacerightsmall bmbfinput_reset" name="cancel" type="button" onclick="document.location.href='<?php echo lw_page::getInstance()->getUrl(); ?>';" value="<?php echo $this->i18n['entry_back']; ?>" /><span class="invisible">&nbsp;</span>
+        
+    </div> 
+
+</div>

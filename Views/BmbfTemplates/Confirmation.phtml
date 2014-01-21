@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="https://www.nks-umwelt.de/assets/css/lwps_bmbf.css" type="text/css" />
+<div class="lwPartneringTool">
+
+	<h1><?php echo $this->i18n['confirm_headline']; ?></h1>
+
+    <p><?php echo $this->i18n['confirm_intro']; ?></p>
+
+    <form name="form" id="form" action="<?php echo $this->actionUrl; ?>" method="post">
+        <input type="hidden" name="save" value="1">
+
+        <div class="pcgcsuche">
+
+            <fieldset>
+
+                <label><?php echo $this->i18n['form_contactname']; ?>:</label><br />
+                <?php echo $this->data['contactname']; ?><br />
+                <br/>
+
+                <label><?php echo $this->i18n['form_country']; ?>:</label><br />
+                <?php echo $this->country; ?><br />
+                <br/>
+
+                <label><?php echo $this->i18n['form_organisationname']; ?>:</label><br />
+                <?php echo $this->data['organisation']; ?><br />
+                <br/>
+
+                <label><?php echo $this->i18n['form_organisationtype']; ?>:</label><br />
+                <?php echo $this->orgatype; ?><br />
+                <br/>
+
+                <label><?php echo $this->i18n['form_email']; ?>:</label><br />
+                <?php echo $this->data['email']; ?><br />
+                <br/>
+
+                <label><?php echo $this->i18n['form_phone']; ?>:</label><br />
+                <?php echo $this->data['telephone']; ?><br />
+                <br/>
+                
+                <label><?php echo $this->i18n['form_keywords']; ?>:</label><br />
+                <?php echo $this->data['keywords']; ?><br />
+                <br/>
+                
+                <label><?php echo $this->i18n['form_description']; ?>:</label><br />
+                <?php echo $this->data['description']; ?><br />
+                <br/>
+                
+                <label><?php echo $this->i18n['form_orgadesc']; ?>:</label><br />
+                <?php echo $this->data['orgadesc']; ?><br />
+                <br/>
+                
+                <label><?php echo $this->i18n['form_topic']; ?>:</label><br />
+                <?php echo $this->topic; ?><br />
+                <br/>
+                
+                <label><?php echo $this->i18n['confirm_confirmation']; ?>:</label><br />
+                <?php $key = "isconfirmed"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <input type="checkbox" name="isconfirmed" value="CONFIRMED" /><br/>
+
+            </fieldset>
+
+        </div>
+        
+        <div id="pcgcsfsubmitarea">
+            <p class="invisible">&nbsp;</p>
+        
+        	<input class="whitespacerightsmall bmbfinput_reset" name="cancel" type="cancel" onclick="document.location.href='<?php echo $this->backUrl;?>';" value="<?php echo $this->i18n['confirm_back']; ?>" /><span class="invisible">&nbsp;</span>
+        	<input class="whitespacerightsmall bmbfinput_submit" name="submitbutton" type="submit" value="<?php echo $this->i18n['confirm_send']; ?>" />
+        
+        </div>          
+
+    </form>
+
+</div>

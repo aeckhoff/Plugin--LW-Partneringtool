@@ -1,0 +1,47 @@
+<div class="lwse_form">
+
+	<h1 class="page-title"><?php echo $this->i18n['confirm_headline']; ?></h1>
+
+    <p><?php echo $this->i18n['confirm_intro']; ?></p>
+    
+    <form name="form" id="form" action="<?php echo $this->actionUrl; ?>" method="post" style="margin-bottom:30px;">
+        <input type="hidden" name="save" value="1">
+        
+        <h1><?php echo $this->i18n['form_contactname']; ?>:</h1>
+        <div class="confirm"><?php echo $this->data['contactname']; ?></div>
+        
+        <h1><?php echo $this->i18n['form_country']; ?>:</h1>
+        <div class="confirm"><?php echo $this->country; ?></div>
+        
+        <h1><?php echo $this->i18n['form_organisationname']; ?>:</h1>
+        <div class="confirm"><?php echo $this->data['organisation']; ?></div>
+
+        <h1><?php echo $this->i18n['form_organisationtype']; ?>:</h1>
+        <div class="confirm"><?php echo $this->orgatype; ?></div>
+        
+        <h1><?php echo $this->i18n['form_email']; ?>:</h1>
+        <div class="confirm"><?php echo $this->data['email']; ?></div>
+        
+        <h1><?php echo $this->i18n['form_phone']; ?>:</h1>
+        <div class="confirm"><?php echo $this->data['telephone']; ?></div>
+        
+        <h1><?php echo $this->i18n['form_keywords']; ?>:</h1>
+        <div class="confirm"><?php echo $this->data['keywords']; ?></div>
+        
+        <h1><?php echo $this->i18n['form_topic']; ?>:</h1>
+        <div class="confirm"><?php echo $this->topic; ?></div>
+        
+        <h1><?php echo $this->i18n['form_description']; ?>:</h1>
+        <div class="confirm_description"><?php echo nl2br($this->data['description']); ?></div>
+        
+        <div id="confirm_check">
+        <?php $key = "isconfirmed"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input type="checkbox" name="isconfirmed" value="CONFIRMED" />&nbsp;<?php echo $this->i18n['confirm_confirmation']; ?>
+        </div>
+        
+        <input style="width:150px;" type="button" onclick="document.location.href='<?php echo $this->backUrl;?>';" value="<?php echo $this->i18n['confirm_back']; ?>" />&nbsp;
+        <input name="submitbutton" style="width:300px;" type="submit" value="<?php echo $this->i18n['confirm_send']; ?>" />
+    
+    </form>
+
+</div>

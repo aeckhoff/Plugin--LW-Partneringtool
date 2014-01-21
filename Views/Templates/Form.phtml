@@ -1,0 +1,104 @@
+<div class="lwse_form">
+
+	<h1 class="page-title"><?php if ($this->SearchOrOffer == "offer"): echo $this->i18n['form_offertitle']; else: echo $this->i18n['form_searchtitle']; endif; ?></h1>
+
+	<?php if($this->isAdmin === true): ?>
+
+    <div style="margin-top:30px;float:left;width:620px;">
+        <form name="deleteform" action="<?php echo $this->deleteUrl; ?>" method="POST">
+            <input type="hidden" name="deleteid" value="<?php echo $this->data['id']; ?>" />
+            <p><?php echo $this->i18n['form_deletenotundoable']; ?></p>
+            <input class="lwse_button" style="border:1px solid red;background-color:red;width:200px;" name="deletebutton" type="submit" value="<?php echo $this->i18n['form_delete']; ?>" onclick="if(!confirm('<?php echo $this->i18n['form_deleteconfirm']; ?>')) return false;"/>
+        </form>
+    </div>   
+
+    <div style="margin-top:30px;float:left;width:620px;margin-left:10px;text-align:right;">    
+		<?php if ($this->data['published'] < 1): ?>
+        <form name="publishform" action="<?php echo $this->publishUrl; ?>" method="POST">
+            <input type="hidden" name="publishid" value="<?php echo $this->data['id']; ?>" />
+            <p>&nbsp;</p>
+            <input class="lwse_button" name="publishbutton" style="border:1px solid #A1C600;background-color:#A1C600;width:200px;" type="submit" value="<?php echo $this->i18n['form_publish']; ?>"/>
+        </form>
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+	<?php endif; ?>    
+    <?php if ($this->data['published'] > 1): ?>
+    <form name="publishform" action="<?php echo $this->unpublishUrl; ?>" method="POST">
+        <input type="hidden" name="publishid" value="<?php echo $this->data['id']; ?>" />
+        <p>&nbsp;</p>
+        <input class="lwse_button" name="publishbutton" style="border:1px solid #A1C600;background-color:#A1C600;width:100px;" type="submit" value="<?php echo $this->i18n['form_unpublish']; ?>"/>
+    </form>
+    <div style="clear:both;">&nbsp;</div>
+    <?php endif; ?>    
+    <?php endif; ?>    
+    <form name="form" id="form" action="<?php echo $this->actionUrl; ?>" method="post" style="margin-bottom:30px;">
+        <input type="hidden" name="save" value="1">
+        <?php if($this->isAdmin === true): ?>
+        	<input type="hidden" name="id" value="<?php echo $this->data['id']; ?>">
+        <?php endif; ?>
+        
+        <?php if(!empty($this->errors)): ?>
+        	<div style="color:red;"><?php echo $this->i18n['form_error']; ?></div>
+        <?php endif; ?>  
+          
+        <h1><?php echo $this->i18n['form_contactname']; ?></h1>
+        <p><?php echo $this->i18n['form_contactname_info']; ?></p>
+        <?php $key = "contactname"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input class="lwse_textinput" type="text" name="contactname" id="contactname" value="<?php echo $this->data['contactname']; ?>">
+
+        <h1><?php echo $this->i18n['form_country']; ?></h1>
+        <p><?php echo $this->i18n['form_country_info']; ?></p>
+        <select name="country">
+            <option value=""><?php echo $this->i18n['form_pleaseselect']; ?></option>
+            <?php foreach($this->countries as $country): ?>
+             <option value="<?php echo $country['kuerzel3']; ?>"<?php if($this->data['country'] == $country['kuerzel3']): ?> selected="selected"<?php endif; ?>><?php echo utf8_decode($country['name']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        
+        <h1><?php echo $this->i18n['form_organisationname']; ?></h1>
+        <p><?php echo $this->i18n['form_organisationname_info']; ?></p>
+        <?php $key = "organisation"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input class="lwse_textinput" type="text" name="organisation" id="organisation" value="<?php echo $this->data['organisation']; ?>">
+        
+        <h1><?php echo $this->i18n['form_organisationtype']; ?>:</h1>
+        <p><?php echo $this->i18n['form_organisationtype_info']; ?></p>
+        <?php echo $this->organistationtypeOptions; ?>
+        <br/>
+        
+        <h1><?php echo $this->i18n['form_email']; ?>:</h1>
+        <p><?php echo $this->i18n['form_email_info']; ?></p>
+        <?php $key = "email"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input class="lwse_textinput" type="text" name="email" id="email" value="<?php echo $this->data['email']; ?>">
+        
+        <h1><?php echo $this->i18n['form_phone']; ?>:</h1>
+        <p><?php echo $this->i18n['form_phone_info']; ?></p>
+        <?php $key = "telephone"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input class="lwse_textinput" type="text" name="telephone" id="telephone" value="<?php echo $this->data['telephone']; ?>">
+        
+        <h1><?php echo $this->i18n['form_keywords']; ?>:</h1>
+        <p><?php echo $this->i18n['form_keywords_info']; ?></p>
+        <?php $key = "keywords"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <input class="lwse_textinput" type="text" name="keywords" id="keywords" value="<?php echo $this->data['keywords']; ?>">
+        
+        <h1><?php echo $this->i18n['form_topic']; ?>:</h1>
+        <p><?php echo $this->i18n['form_topic_info']; ?></p>
+        <?php echo $this->topicOptions; ?>
+        <br/>
+        
+        <h1><?php echo $this->i18n['form_description']; ?></h1>
+        <p><?php echo $this->i18n['form_description_info']; ?></p>
+        <?php $key = "description"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <textarea class="lwse_textarea" name="description" id="description"><?php echo $this->f($this->data['description']); ?></textarea>
+        
+        <?php if(!$this->isAdmin): ?>
+        	<input name="submitbutton" style="width:300px;" type="submit" value="<?php echo $this->i18n['form_nextstep']; ?>" />
+        <?php endif; ?>
+        
+        <?php if($this->isAdmin === true): ?>
+        	<input class="lwse_button" name="cancel" style="width:200px;" type="button" onclick="document.location.href='<?php echo $this->backUrl; ?>';" value="<?php echo $this->i18n['form_cancel']; ?>" />&nbsp;
+        	<input class="lwse_button" name="submitbutton" style="width:200px;" type="submit" value="<?php echo $this->i18n['form_save']; ?>" />
+        <?php endif; ?>
+    
+    </form>
+
+</div>

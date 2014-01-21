@@ -1,0 +1,490 @@
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+
+
+<style>
+
+#lw_cbox_wrapper {
+    width:940px;	
+    border:1px solid #ddd;
+    position:relative;
+    text-align:left;
+    font-family:Arial, sans-serif;
+    margin-left:15px;
+    margin-top:10px;
+}
+
+#lw_cbox_header {
+    background-color:white;
+    position:relative;
+    height:50px;
+}
+
+#lw_cbox_header h1 {
+    position:absolute;
+    color:#555;
+    top:7px;
+    left:10px;
+    margin:0px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-size:28px;
+    font-weight:700;
+}
+
+#lw_cbox_content {
+    background-color:#eee;
+    border-top:1px solid #ddd;
+}
+
+#lw_cbox_input_area {
+    width:58%;
+    float:left;
+    padding:5px;
+    padding-left:10px;
+}
+
+#lw_cbox_help_area {
+    width:38%;
+    float:left;
+    padding:5px;
+    margin-top:10px;
+    color:#555;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+#lw_cbox_help_area h2 {
+    font-weight:bold;
+    font-size:14px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+#lw_cbox_help_area h3 {
+    font-weight:normal;
+    font-size:14px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+}
+
+#lw_cbox_help_area p {
+    font-weight:normal;
+    font-size:12px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:400;
+    margin-bottom:3px;
+}
+
+#lw_cbox_helpbutton {
+    position:absolute;
+    right:5px;
+    top:5px;
+}
+
+#lw_cbox_save_button {
+
+}
+
+#lw_cbox_buttons {
+    margin-top:20px;
+    padding-bottom:10px;
+    margin-left:10px;
+}
+
+.help_tooltip {
+    position:absolute;
+    background-color:#333;
+    border:1px solid black;
+    padding:10px;
+    top:65px;
+    left:560px;
+    width:340px;
+    color:white;
+    -moz-border-radius:5px;
+}
+
+.help_tooltip_arrow {
+    position:absolute;
+    top:0px;
+    left:-10px;
+}
+
+.help_tooltip h1 {
+    font-size:14px;
+    margin-top:0px;
+    color:white;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+}
+
+.help_tooltip h2 {
+    font-size:12px;
+    margin-top:0px;
+    margin-bottom:0px;
+    color:white;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+}
+
+.help_tooltip p {
+    font-size:12px;
+    color:white;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:400;
+    margin-bottom:5px;
+}
+
+.help_tooltip ul {
+    margin-top:3px;
+    padding-left:14px;
+}
+
+.help_tooltip li {
+    font-size:12px;
+    color:white;
+    
+}
+
+.help_tooltip em {
+    font-style:normal;
+    color:#FF9D00;
+}
+
+.lw_cbox_label {
+    font-weight:bold;
+    font-size:14px;
+    margin-top:5px;
+    margin-bottom:5px;
+    display:block;
+    color:#555;
+    margin-top:10px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+}
+
+.lw_cbox_button {
+    -moz-border-radius:5px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-weight:700;
+    font-size:16px;
+}
+
+.green_button {
+    background-color:#00A80B;
+    border:1px solid #00A80B;
+    color:white;
+    
+}
+
+.gray_button {
+    background-color:#aaa;
+    border:1px solid #aaa;
+    color:white;
+}
+
+.lw_cbox_input_textarea {
+    width:100%;
+    height:400px;
+    font-family: 'PT Mono', monospace;
+    font-size:14px;
+    padding:5px;
+}
+
+.lw_cbox_input {
+    width:100%;
+    border:1px solid #aaa;
+    padding:5px;
+    font-family: 'PT Mono', monospace;
+    font-size:14px;
+}
+
+.lw_cbox_select {
+    width:100%;
+    padding:5px;
+    font-family: 'PT Mono', monospace;
+    font-size:14px;
+}
+
+.lw_cbox_input_wrapper {
+    position:relative;
+}
+
+</style>
+
+<script>
+function displayHelp(element)
+{
+    var id = element.id;
+    var helpId = id+'_help';
+    if (document.getElementById(helpId)) document.getElementById(helpId).style.display = 'block';
+}
+
+function hideHelp(element)
+{
+    var id = element.id;
+    var helpId = id+'_help';
+    if (document.getElementById(helpId)) document.getElementById(helpId).style.display = 'none';
+}
+
+function toggleMail(element)
+{
+    var value = element.value;
+    if (value == 'offer'||value == 'search') {
+        document.getElementById('mailparameter').style.display = 'block';
+    } else {
+        document.getElementById('mailparameter').style.display = 'none';
+    }
+}
+</script>
+
+
+
+
+
+<div id="lw_cbox_wrapper">
+<form action="<?php echo $this->actionUrl; ?>" method="POST">
+<input type="hidden" name="save" value="1" />
+<div id="lw_cbox_header">
+<h1>LWSE Partnering-Tool</h1>
+</div>
+
+<div id="lw_cbox_content">
+
+<div id="lw_cbox_input_area">
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="mode">Mode <span style="color:red;"><?php if(isset($this->errors['mode'])) echo $this->errors['mode']; ?></span></label>
+
+<select class="lw_cbox_select" id="mode" name="mode" onFocus="displayHelp(this);" onBlur="hideHelp(this);" onchange="toggleMail(this);">
+<option value="">Please choose ...</option>
+<option value="search" <?php if ($this->mode == 'search'):?> selected="selected"<?php endif; ?>>Partner Search Input</option>
+<option value="offer" <?php if ($this->mode == 'offer'):?> selected="selected"<?php endif; ?>>Partner Offer Input</option>
+<option value="list" <?php if ($this->mode == 'list'):?> selected="selected"<?php endif; ?>>List of Published Entries (public)</option>
+<option value="admin" <?php if ($this->mode == 'admin'):?> selected="selected"<?php endif; ?>>Administration Console (protected)</option>
+</select>
+
+<div class="help_tooltip" id="accesscontrol_help" style="display:none;top:15px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>Mode</h1>
+<p>Here you define the mode of this plugin.</p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+</ul>
+</div>
+
+</div>
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="description">Description <span style="color:red;"><?php if(isset($this->errors['description'])) echo $this->errors['description']; ?></span></label>
+<textarea class="lw_cbox_input_textarea" id="description" name="description" style="height:200px;" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/><?php echo $this->description; ?></textarea>
+
+<div class="help_tooltip" id="description_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>Description</h1>
+<p>In this field you may fill in a short description of this content box.</p>
+<h2>Constraints</h2>
+<ul>
+    <li>optional</li>
+    <li>maximum 2000 Character</li>
+</ul>
+</div>
+
+</div>
+
+<div id="mailparameter" style="display:none;">
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="mailsubject">User E-Mail Subject <span style="color:red;"><?php if(isset($this->errors['mailsubject'])) echo $this->errors['mailsubject']; ?></span></label>
+<input type="text" class="lw_cbox_input" id="mailsubject" name="mailsubject" value="<?php echo $this->mailsubject; ?>" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/>
+
+<div class="help_tooltip" id="mailsubject_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>User E-Mail Subject</h1>
+<p>Subject of the E-Mail sent to the user who placed the search/offer</p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>maximum 255 characters</li>
+</ul>
+</div>
+
+</div>
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="mailsender">User E-Mail Sender <span style="color:red;"><?php if(isset($this->errors['mailsender'])) echo $this->errors['mailsender']; ?></span></label>
+<input type="text" class="lw_cbox_input" id="mailsender" name="mailsender" value="<?php echo $this->mailsender; ?>" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/>
+
+<div class="help_tooltip" id="mailsender_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>User E-Mail Sender</h1>
+<p>E-Mail address of the sender of the mail that is sent to the user who placed the search/offer. <em>Please use an e-mail account that exists and that is frequently checked for new mail.</em></p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>E-Mail-Address</li>
+</ul>
+</div>
+
+</div>
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="mailtemplate">User E-Mail Template <span style="color:red;"><?php if(isset($this->errors['mailtemplate'])) echo $this->errors['mailtemplate']; ?></span></label>
+<textarea class="lw_cbox_input_textarea" id="mailtemplate" name="mailtemplate" style="height:200px;" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/><?php echo $this->mailtemplate; ?></textarea>
+
+<div class="help_tooltip" id="mailtemplate_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>User E-Mail Template</h1>
+<p>In this field you define the e-mail text that is used for mail that is sent to the user who placed the search/offer.</p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>maximum 2000 Character</li>
+</ul>
+<h2>Placeholders</h2>
+<ul>
+    <li>%%- contactname -%% : last name of the user</li>
+    <li>%%- organisation -%% : organisation name of the user</li>
+    <li>%%- email -%% : the email address of the user</li>
+    <li>%%- telephone -%% : the telephone number of the user</li>
+    <li>%%- country -%% : the country the user lives in</li>
+    <li>%%- topic -%% : the topic-ID the user chose</li>
+    <li>%%- description -%% : the description of the search/offer</li>
+    <li>%%- orgadesc -%% : the description of the organisation</li>
+    <li>%%- keywords -%% : the keywords</li>
+</ul>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="adminmailsubject">Admin E-Mail Subject <span style="color:red;"><?php if(isset($this->errors['adminmailsubject'])) echo $this->errors['adminmailsubject']; ?></span></label>
+<input type="text" class="lw_cbox_input" id="adminmailsubject" name="adminmailsubject" value="<?php echo $this->adminmailsubject; ?>" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/>
+
+<div class="help_tooltip" id="adminmailsubject_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>Admin E-Mail Subject</h1>
+<p>Subject of the E-Mail sent to the admin</p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>maximum 255 characters</li>
+</ul>
+</div>
+
+</div>
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="adminmailrecipients">Admin E-Mail Recipients <span style="color:red;"><?php if(isset($this->errors['adminmailrecipients'])) echo $this->errors['adminmailrecipients']; ?></span></label>
+<input type="text" class="lw_cbox_input" id="adminmailrecipients" name="adminmailrecipients" value="<?php echo $this->adminmailrecipients; ?>" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/>
+
+<div class="help_tooltip" id="adminmailrecipients_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>Admin E-Mail Recipients</h1>
+<p>E-Mail address(es) of the the recipients of the admin mail. <em>Please use an e-mail account that exists and that is frequently checked for new mail.</em></p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>E-Mail-Address</li>
+    <li>E-Mail-Adresses seperated by ;</lil>
+</ul>
+</div>
+
+</div>
+
+
+<div class="lw_cbox_input_wrapper">
+<label class="lw_cbox_label" for="adminmailtemplate">Admin E-Mail Template <span style="color:red;"><?php if(isset($this->errors['adminmailtemplate'])) echo $this->errors['adminmailtemplate']; ?></span></label>
+<textarea class="lw_cbox_input_textarea" id="adminmailtemplate" name="adminmailtemplate" style="height:200px;" onFocus="displayHelp(this);" onBlur="hideHelp(this);"/><?php echo $this->adminmailtemplate; ?></textarea>
+
+<div class="help_tooltip" id="adminmailtemplate_help" style="display:none;top:0px;">
+<img src="<?php echo $this->mediaUrl; ?>pics/arrow.png" class="help_tooltip_arrow" style="top:20px;" /> 
+<h1>Admin E-Mail Template</h1>
+<p>In this field you define the e-mail text that is used for the admin-e-mail.</p>
+<h2>Constraints</h2>
+<ul>
+    <li>required</li>
+    <li>maximum 2000 Character</li>
+</ul>
+<h2>Placeholders</h2>
+<ul>
+    <li>%%- contactname -%% : last name of the user</li>
+    <li>%%- organisation -%% : organisation name of the user</li>
+    <li>%%- email -%% : the email address of the user</li>
+    <li>%%- telephone -%% : the telephone number of the user</li>
+    <li>%%- country -%% : the country the user lives in</li>
+    <li>%%- topic -%% : the topic-ID the user chose</li>
+    <li>%%- description -%% : the description of the search/offer</li>
+    <li>%%- orgadesc -%% : the description of the organisation</li>
+    <li>%%- keywords -%% : the keywords</li>
+</ul>
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div id="lw_cbox_help_area">
+<h2>General Remarks</h2>
+
+<h3>Usage</h3>
+
+<p>This partnering tool provides means to place offers and searches.</p>
+
+
+
+</div>
+
+<div style="clear:both;">&nbsp;</div>
+
+<div id="lw_cbox_buttons">
+<input type="submit" class="lw_cbox_button green_button" id="lw_cbox_save_button" value="SAVE" /> <input class="lw_cbox_button gray_button" type="button" id="lw_cbox_cancel_button" value="CANCEL" onclick="document.location.href='<?php echo $this->cancelUrl; ?>';"/>
+</div>
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+<script>
+toggleMail(document.getElementById('mode'));
+</script>
+</form>

@@ -1,0 +1,22 @@
+<div class="lwse_form">
+
+	<h1 class="page-title"><?php echo $this->i18n['entry_headline']; ?></h1>
+    <h1><?php echo $this->i18n['entry_contactname']; ?></h1>
+    <div class="view"><?php echo $this->data['contactname']; ?></div>
+    <h1><?php echo $this->i18n['entry_country']; ?></h1>
+    <div class="view"><?php echo $this->country; ?></div>
+    <h1><?php echo $this->i18n['entry_organisation']; ?></h1>
+    <div class="view"><?php echo $this->data['organisation']; ?></div>    
+    <h1><?php echo $this->i18n['entry_orgatype']; ?></h1>
+    <div class="view"><?php echo $this->orgatype; ?></div>
+    <h1><?php echo $this->i18n['entry_email']; ?>:</h1>
+    <div class="view"><a href="mailto:<?php echo $this->data['email']; ?>"><?php echo $this->data['email']; ?></a></div>
+    <h1><?php echo $this->i18n['entry_keywords']; ?></h1>
+    <div class="view"><?php echo $this->data['keywords']; ?></div>    
+    <h1><?php echo $this->i18n['entry_topic']; ?></h1>
+    <div class="view"><?php echo $this->topic; ?></div>    
+    <h1><?php echo $this->i18n['entry_description']; ?></h1>
+    <div class="view_description"><?php echo nl2br($this->data['description']); ?></div>    
+    <div style="margin-top:30px;margin-bottom:30px;"><a href="<?php echo lw_page::getInstance()->getUrl(); ?>"><?php echo $this->i18n['entry_back']; ?></a></div>
+
+</div>

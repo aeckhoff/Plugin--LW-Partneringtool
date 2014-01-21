@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="https://www.nks-umwelt.de/assets/css/lwps_bmbf.css" type="text/css" />
+<div class="lwPartneringTool">
+
+	<h1><?php if ($this->SearchOrOffer == "offer"): echo $this->i18n['form_offertitle']; else: echo $this->i18n['form_searchtitle']; endif; ?></h1>
+
+    <?php if(strlen(trim($this->introduction))>0): ?>
+    <p><?php echo $this->introduction; ?></p>
+    <?php endif; ?>
+
+    <form name="form" id="form" action="<?php echo $this->actionUrl; ?>" method="post" style="margin-bottom:30px;">
+        <input type="hidden" name="save" value="1">
+        <?php if($this->isAdmin === true): ?>
+        	<input type="hidden" name="id" value="<?php echo $this->data['id']; ?>">
+        <?php endif; ?>
+
+        <div class="pcgcsuche">
+
+            <fieldset>
+
+                <?php if(!empty($this->errors)): ?>
+            	<p class="error"><?php echo $this->i18n['form_error']; ?></p>
+                <?php endif; ?>  
+
+                <label for="contactname"><?php echo $this->i18n['form_contactname']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php $key = "contactname"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <input type="text" class="form_input_medium" id="contactname" name="contactname" title="<?php echo $this->i18n['form_contactname_info']; ?>..." size="30" maxlength="100" value="<?php echo $this->data['contactname']; ?>" /><br />
+
+                <label for="country"><?php echo $this->i18n['form_country']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label></label><br />
+                <?php $key = "country"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <select size="1" name="country" id="country" title="<?php echo $this->i18n['form_country_info']; ?>">
+                    <option value=""><?php echo $this->i18n['form_pleaseselect']; ?></option>
+                    <?php foreach($this->countries as $country): ?>
+                     <option value="<?php echo $country['kuerzel3']; ?>"<?php if($this->data['country'] == $country['kuerzel3']): ?> selected="selected"<?php endif; ?>><?php echo utf8_decode($country['name_de']); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <br /><br />
+
+                <label for="organisation"><?php echo $this->i18n['form_organisationname']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php $key = "organisation"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <input type="text" class="form_input_medium" id="organisation" name="organisation" title="<?php echo $this->i18n['form_organisationname_info']; ?>..." size="30" maxlength="100" value="<?php echo $this->data['organisation']; ?>" /><br />
+
+                <label for="organisationtype"><?php echo $this->i18n['form_organisationtype']; ?>:</label> *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span><br />
+                <?php $key = "orgatype"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <p class="invisible"><?php echo $this->i18n['form_organisationtype_info']; ?></p>
+                <p><?php echo $this->organistationtypeOptions; ?></p>
+                <br />
+
+                <label for="email"><?php echo $this->i18n['form_email']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php if(isset($this->errors['email'])): ?><span class="error"><?php echo $this->errors['email']; ?></span><br/><?php endif; ?>
+                <input type="text" class="form_input_medium" id="email" name="email" title="<?php echo $this->i18n['form_email_info']; ?>..." size="30" maxlength="100" value="<?php echo $this->data['email']; ?>" /><br />
+
+                <label for="telephone"><?php echo $this->i18n['form_phone']; ?>:</label><br />
+                <?php $key = "telephone"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <input type="text" class="form_input_medium" id="telephone" name="telephone" title="<?php echo $this->i18n['form_phone_info']; ?>..." size="30" maxlength="100" value="<?php echo $this->data['telephone']; ?>" /><br />
+
+                <label for="keywords"><?php echo $this->i18n['form_keywords']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label></label><br />
+                <?php $key = "keywords"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <input type="text" class="form_input_medium" id="keywords" name="keywords" title="<?php echo $this->i18n['form_keywords_info']; ?>..." size="30" maxlength="100" value="<?php echo $this->data['keywords']; ?>" /><br />
+
+                <label for="description"><?php echo $this->i18n['form_description']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php $key = "description"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <textarea cols="60" rows="8" name="description" id="description" title="<?php echo $this->i18n['form_description_info']; ?>..."><?php echo $this->f($this->data['description']); ?></textarea>
+                <br/><br/>
+                
+                <label for="orgadesc"><?php echo $this->i18n['form_orgadesc']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php $key = "orgadesc"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <textarea cols="60" rows="8" name="orgadesc" id="orgadesc" title="<?php echo $this->i18n['form_orgadesc_info']; ?>..."><?php echo $this->f($this->data['orgadesc']); ?></textarea>
+                <br/><br/>
+                
+                <label for="topic"><?php echo $this->i18n['form_topic']; ?>: *<span class="invisible">(bitte dieses Feld ausf&uuml;llen)</span></label><br />
+                <?php $key = "topic"; if(isset($this->errors[$key])) echo '<span class="error">'.$this->errors[$key].'</span><br/>'; ?>
+                <p class="invisible"><?php echo $this->i18n['form_topic_info']; ?></p>
+                <p><?php echo $this->topicOptions; ?></p>
+                
+            </fieldset>
+
+        </div>
+        
+        <div id="pcgcsfsubmitarea">
+            <p class="invisible">&nbsp;</p>
+            <?php if(!$this->isAdmin): ?>
+            	<input class="whitespacerightsmall bmbfinput_submit" name="submitbutton" type="submit" value="<?php echo $this->i18n['form_nextstep']; ?>" /><span class="invisible">&nbsp;</span>
+            <?php endif; ?>
+            
+            <?php if($this->isAdmin === true): ?>
+            	<input class="whitespacerightsmall bmbfinput_reset" name="cancel" type="button" onclick="document.location.href='<?php echo $this->backUrl; ?>';" value="<?php echo $this->i18n['form_cancel']; ?>" /><span class="invisible">&nbsp;</span>
+            	<input class="whitespacerightsmall bmbfinput_submit" name="submitbutton" type="submit" value="<?php echo $this->i18n['form_save']; ?>" />
+            <?php endif; ?>            
+            
+        </div>        
+    
+    </form>
+
+	<?php if($this->isAdmin === true): ?>
+    <form name="deleteform" action="<?php echo $this->deleteUrl; ?>" method="POST">
+        <input type="hidden" name="deleteid" value="<?php echo $this->data['id']; ?>" />
+        <div id="pcgcsfsubmitarea">
+            <p class="invisible">&nbsp;</p>
+            <h3><?php echo $this->i18n['form_delete']; ?></h3>
+            <p><?php echo $this->i18n['form_deletenotundoable']; ?></p>    
+            <input class="whitespacerightsmall bmbfinput_submit" name="deletebutton" type="submit" value="<?php echo $this->i18n['form_delete']; ?>" onclick="if(!confirm('<?php echo $this->i18n['form_deleteconfirm']; ?>')) return false;"/>
+        </div>  
+    </form>
+    
+		<?php if ($this->data['published'] < 1): ?>
+        <form name="publishform" action="<?php echo $this->publishUrl; ?>" method="POST">
+            <input type="hidden" name="publishid" value="<?php echo $this->data['id']; ?>" />
+            <div id="pcgcsfsubmitarea">
+                <p class="invisible">&nbsp;</p>
+                <h3><?php echo $this->i18n['form_publish']; ?></h3>
+                <input class="whitespacerightsmall bmbfinput_submit" name="publishbutton" type="submit" value="<?php echo $this->i18n['form_publish']; ?>"/>
+            </div>
+        </form>
+    	<?php endif; ?>    
+    
+        <?php if ($this->data['published'] > 1): ?>
+        <form name="publishform" action="<?php echo $this->unpublishUrl; ?>" method="POST">
+            <input type="hidden" name="publishid" value="<?php echo $this->data['id']; ?>" />
+            <div id="pcgcsfsubmitarea">
+                <p class="invisible">&nbsp;</p>
+                <h3><?php echo $this->i18n['form_unpublish']; ?></h3>
+                <input class="whitespacerightsmall bmbfinput_submit" name="publishbutton" type="submit" value="<?php echo $this->i18n['form_unpublish']; ?>"/>
+            </div>
+        </form>
+        <?php endif; ?>    
+    
+    <?php endif; ?>            
+
+</div>
