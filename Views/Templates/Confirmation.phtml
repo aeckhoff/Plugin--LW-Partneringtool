@@ -33,6 +33,11 @@
         
         <h1><?php echo $this->i18n['form_description']; ?>:</h1>
         <div class="confirm_description"><?php echo nl2br($this->data['description']); ?></div>
+
+        <h1><?php echo $this->i18n['form_orgadesc']; ?>:</h1>
+        <div class="confirm_orgadesc"><?php echo nl2br($this->data['orgadesc']); ?></div>
+        
+        <br/>        
         
         <div id="confirm_check">
         <?php $key = "isconfirmed"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>

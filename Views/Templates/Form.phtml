@@ -51,7 +51,7 @@
         <select name="country">
             <option value=""><?php echo $this->i18n['form_pleaseselect']; ?></option>
             <?php foreach($this->countries as $country): ?>
-             <option value="<?php echo $country['kuerzel3']; ?>"<?php if($this->data['country'] == $country['kuerzel3']): ?> selected="selected"<?php endif; ?>><?php echo utf8_decode($country['name']); ?></option>
+             <option value="<?php echo $country['kuerzel3']; ?>"<?php if($this->data['country'] == $country['kuerzel3']): ?> selected="selected"<?php endif; ?>><?php echo utf8_decode($country['name_de']); ?></option>
             <?php endforeach; ?>
         </select>
         
@@ -89,6 +89,12 @@
         <p><?php echo $this->i18n['form_description_info']; ?></p>
         <?php $key = "description"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
         <textarea class="lwse_textarea" name="description" id="description"><?php echo $this->f($this->data['description']); ?></textarea>
+        <br/> 
+        
+        <h1><?php echo $this->i18n['form_orgadesc']; ?></h1>
+        <p><?php echo $this->i18n['form_orgadesc_info']; ?></p>
+        <?php $key = "orgadesc"; if(isset($this->errors[$key])) echo '<p class="error">'.$this->errors[$key].'</p>'; ?>
+        <textarea class="lwse_textarea" name="orgadesc" id="orgadesc"><?php echo $this->f($this->data['orgadesc']); ?></textarea>
         
         <?php if(!$this->isAdmin): ?>
         	<input name="submitbutton" style="width:300px;" type="submit" value="<?php echo $this->i18n['form_nextstep']; ?>" />
