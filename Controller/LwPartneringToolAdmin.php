@@ -132,7 +132,13 @@ class LwPartneringToolAdmin extends LwPartneringToolController
         require_once(dirname(__FILE__).'/../Views/LwPartneringToolForm.php');
         $view = new LwPartneringToolForm($this->configuration);
         $view->setTranslationData($this->getTranslationData());
-        $view->setData($this->repository->getEntry($this->request->getInt('id')));
+        if (empty($this->errors)) {
+            $view->setData($this->repository->getEntry($this->request->getInt('id')));
+        }
+        else {
+            $view->setData($this->data);
+        }
+
         $view->setId($this->request->getInt('id'));
         $view->setErrors($this->errors);
         $view->setTopics($this->repository->getTopics());
