@@ -1,49 +1,75 @@
-<div class="lwse_form">
-    <h1 class="page-title"><?php echo $this->i18n['adminlist_headline']; ?></h1>
+<div class="lwps_form">
+    
+    <h1 class="lwps_headline"><?php echo $this->i18n['adminlist_headline']; ?></h1>
 
     <form action="<?php echo $this->actionUrl; ?>" id="filterform" method="POST">
+
         <input type="hidden" name="changefilter" value="1" />
-        <select name="filter" onchange="document.getElementById('filterform').submit();">
-            <option value="all" <?php if ($this->filter == 'all'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showall']; ?></option>
-            <option value="unpublished" <?php if ($this->filter == 'unpublished'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showunpublished']; ?></option>
-            <option value="published" <?php if ($this->filter == 'published'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showpublished']; ?></option>
-        </select>
+
+        <div class="lwps_searchfilter">
+            <select name="filter" onchange="document.getElementById('filterform').submit();">
+                <option value="all" <?php if ($this->filter == 'all'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showall']; ?></option>
+                <option value="unpublished" <?php if ($this->filter == 'unpublished'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showunpublished']; ?></option>
+                <option value="published" <?php if ($this->filter == 'published'): ?>selected="selected"<?php endif; ?>><?php echo $this->i18n['adminlist_showpublished']; ?></option>
+            </select>
+        </div>
+
     </form>
 
-    <?php if(count($this->entries) == 0): ?>
-    <p style="margin-top:30px;"><?php echo $this->i18n['adminlist_noentriesavailable']; ?></p>
-    <?php endif; ?>
-
     <hr/>
-    <?php foreach($this->entries as $entry): ?>
 
-    <?php foreach($entry as $key=>$value) {
-       
-        $entry[$key] = strip_tags($entry[$key]);
-        $entry[$key] = htmlentities($entry[$key],ENT_QUOTES,'UTF-8');
-    } 
-    ?>
+    <?php if(count($this->entries) == 0): ?>
+    <p class="lwps_infotext"><?php echo $this->i18n['adminlist_noentriesavailable']; ?></p>
+    <?php else: ?>
 
-    <div class="entry">
+    <div class="lwps_searchresult">
 
-        <a href="<?php echo $this->editUrl; ?>&id=<?php echo $entry['id']; ?>" class="edit"><?php echo $this->i18n['adminlist_editbutton']; ?></a>
-        <h2 class="searchoroffer"><?php echo $this->i18n['adminlist_type_'.$entry['request_type']]; ?></h2>
-        <h2 class="organisation"><?php echo $entry['organisation']; ?></h2>
-        <h3 class="contactname"><?php echo $entry['contactname']; ?>, <?php echo $this->formatDate($entry['created_at']); ?></h3>
-        <p class="description"><?php 
+        <?php foreach($this->entries as $entry): ?>
+
+        <?php foreach($entry as $key=>$value) {
+            $entry[$key] = strip_tags($entry[$key]);
+            $entry[$key] = htmlentities($entry[$key],ENT_QUOTES,'UTF-8');
+        } 
+        ?>
+
+        <div class="lwps_entry">
+
+            <a href="<?php echo $this->editUrl; ?>&id=<?php echo $entry['id']; ?>" class="edit"><?php echo $this->i18n['adminlist_editbutton']; ?></a>
+
+            <div class="lwps_organisation">
+                <?php echo $entry['organisation']; ?>
+            </div>
+
+            <div class="lwps_searchoroffer"><?php echo $this->i18n['list_type_'.$entry['request_type']]; ?></div>
+
+            <div class="lwps_topic"><?php echo $this->topics[$entry['topic']]; ?></div>
+
+            <div class="lwps_metadata">
+                <span class="lwps_contact"><?php echo $entry['contactname']; ?></span>, <span class="lwps_date"><?php echo $this->formatDate($entry['created_at']); ?></span>
+            </div>
+
+            <p class="lwps_description"><?php         
             if (strlen($entry['description']) > 255) {
                 $entry['description'] = substr($entry['description'],0,255).' ...';
             }
             echo $entry['description'];
-            ?>
-        </p>
+             ?></p>
 
-        <?php if($entry['published'] < 1):?>
-        <p class="notpublished"><?php echo $this->i18n['adminlist_entryisnotpublished']; ?></p>
-        <?php endif; ?>
+             <p class="lwps_keywordsarea">
+                <label><?php echo $this->i18n['list_keywords']; ?>: </label><div class="lwps_keywords"><?php echo $entry['keywords']; ?></div>
+             </p>
+
+            <?php if($entry['published'] < 1):?>
+            <p class="notpublished"><?php echo $this->i18n['adminlist_entryisnotpublished']; ?></p>
+            <?php endif; ?>
+
+        </div>
+
+        <hr/>
+
+        <?php endforeach; ?>
 
     </div>
-    <hr/>
-    <?php endforeach; ?>
-
+    
+<?php endif; ?>
 </div>

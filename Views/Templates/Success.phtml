@@ -1,7 +1,13 @@
-<div class="lwse_form">
+<div class="lwps_form">
 
-    <h1 class="page-title"><?php echo $this->i18n['success_headline']; ?></h1>    
-    <?php echo $this->i18n['success_text']; ?>
-    <p><a href="<?php echo lw_page::getInstance($this->index)->getUrl(); ?>"><?php echo $this->i18n['success_back']; ?></a></p>
+    <h1 class="lwps_headline"><?php echo $this->i18n['success_headline']; ?></h1>    
+
+    <p class="lwps_infotext">
+        <?php echo $this->i18n['success_text']; ?>
+    </p>
+
+    <div class="lwps_back_area">
+        <a href="<?php echo lw_page::getInstance($this->index)->getUrl(); ?>"><?php echo $this->i18n['success_back']; ?></a>
+    </div>
 
 </div>
