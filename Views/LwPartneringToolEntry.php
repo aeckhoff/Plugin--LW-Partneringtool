@@ -47,10 +47,10 @@ class LwPartneringToolEntry extends lw_object
     public function render()
     {
         foreach($this->data as $key=>$value) {
-            $data[$key] = htmlentities($this->data[$key], ENT_QUOTES, 'UTF-8');
+            //$data[$key] = htmlentities($this->data[$key], ENT_QUOTES, 'UTF-8');
+            $data[$key] = htmlentities($this->data[$key], ENT_QUOTES);
         }
         $this->view->data = $data;
         return $this->view->render();
-
     }
 }
